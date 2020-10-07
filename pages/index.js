@@ -20,9 +20,8 @@ export async function getStaticProps() {
 
 const Container = styled.div`
   font-family: ${({ theme }) => theme.defaultFont};
-  padding: ${({ theme }) => theme.spacing_3};
-  max-width: 1140px;
   padding: 0 1rem;
+  max-width: 1140px;
   widthL 100%;
   position: relative;
   margin: auto;
@@ -37,12 +36,14 @@ const Index = ({ repositories: repoData }) => {
   const [orderingType, setOrderingType] = useState('');
 
   return (
-    <Container>
+    <>
       <Header owner={ownerData} />
-      <SearchArea {...{ searchInputValue, setSearchInputValue, setOrderingType, setSelectedLanguages, languagesArray }} />
-      <ReposList repositories={repoData}  {...{ searchInputValue, selectedLanguages, orderingType }} />
-      <BackTop />
-    </Container>
+      <Container>
+        <SearchArea {...{ searchInputValue, setSearchInputValue, setOrderingType, setSelectedLanguages, languagesArray }} />
+        <ReposList repositories={repoData} {...{ searchInputValue, selectedLanguages, orderingType }} />
+        <BackTop />
+      </Container>
+    </>
   );
 };
 

@@ -9,6 +9,10 @@ const Logotype = styled.h1`
   font-weight: bold;
   font-size: 24px;
   margin-bottom: 0;
+
+  @media screen and (max-width: 700px) {
+    display: none;
+  }
 `;
 
 const LogoContainer = styled.div`
@@ -18,6 +22,7 @@ const LogoContainer = styled.div`
   border-radius: 50%;
   overflow: hidden;
   justify-content: center;
+  margin-right: 1rem;
   height: ${logoDimension};
   width: ${logoDimension};
 `;
@@ -26,7 +31,7 @@ const LogoGroupContainer = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding: ${({ theme }) => theme.spacing_04};
 `;
 

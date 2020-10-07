@@ -16,11 +16,10 @@ export const Header = ({ owner }) => {
   return (
     <HeaderContainer>
       <Row>
-        <Col span={5}>
+        <Col span={12}>
           <Logo />
         </Col>
-        <Col span={14}></Col>
-        <Col span={5}>
+        <Col span={12}>
           <UserPreview {...owner} />
         </Col>
       </Row>

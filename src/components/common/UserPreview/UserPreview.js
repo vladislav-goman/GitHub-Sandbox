@@ -6,7 +6,7 @@ const UserPreviewContainer = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: flex-end;
   padding: ${({ theme }) => theme.spacing_04};
 `;
 
@@ -15,6 +15,10 @@ const UserName = styled.h2`
   font-weight: bold;
   font-size: 24px;
   margin-bottom: 0;
+
+  @media screen and (max-width: 700px) {
+    font-size: 18px;
+  }
 `;
 
 const AvatarContainer = styled.div`
@@ -24,6 +28,7 @@ const AvatarContainer = styled.div`
   border-radius: 50%;
   overflow: hidden;
   justify-content: center;
+  margin-right: 1rem;
 `;
 
 export const UserPreview = ({ login, avatar_url }) => {
