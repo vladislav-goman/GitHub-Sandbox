@@ -1,19 +1,42 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Image } from 'antd';
 
-const Container = styled.div`
-  font-family: ${({ theme }) => theme.defaultFont};
-  padding: ${({ theme }) => theme.spacing_3};
+const logoDimension = '2rem';
+
+const Logotype = styled.h1`
   color: ${({ theme }) => theme.white};
-  font-weight: 500;
+  font-weight: bold;
+  font-size: 24px;
+  margin-bottom: 0;
 `;
 
-const 
+const LogoContainer = styled.div`
+  height: 100%;
+  display: flex;
+  align-items: center;
+  border-radius: 50%;
+  overflow: hidden;
+  justify-content: center;
+  height: ${logoDimension};
+  width: ${logoDimension};
+`;
+
+const LogoGroupContainer = styled.div`
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: ${({ theme }) => theme.spacing_04};
+`;
 
 export const Logo = () => {
   return (
-    <Container>
-      <h1>Knowledge Lab</h1>
-    </Container>
+    <LogoGroupContainer>
+      <LogoContainer>
+        <Image height={logoDimension} width={logoDimension} alt="GitHub Sandbox" src="/img/github.jpg" placeholder />
+      </LogoContainer>
+      <Logotype>GitHub Sandbox</Logotype>
+    </LogoGroupContainer>
   );
 };

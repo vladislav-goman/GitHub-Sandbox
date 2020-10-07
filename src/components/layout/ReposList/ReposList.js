@@ -1,9 +1,23 @@
-import React, { useCallback } from "react";
-import { RepoItem } from "../../common/RepoItem";
+import React from 'react';
+import styled from 'styled-components';
+import { RepoItem } from '../../common/RepoItem';
+import { Row, Col } from 'antd';
+
+const ReposListContainer = styled.div`
+
+`;
 
 export const ReposList = ({ repositories = [] }) => {
   const content = repositories.map((repoItemData) => {
-    return <RepoItem {...repoItemData} key={repoItemData.id} />;
+    return (
+      <Col span={24}>
+        <RepoItem {...repoItemData} key={repoItemData.id} />
+      </Col>
+    );
   });
-  return <div>{content}</div>;
+  return (
+    <ReposListContainer>
+      <Row>{content}</Row>
+    </ReposListContainer>
+  );
 };

@@ -1,17 +1,29 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Row, Col } from 'antd';
 import { Logo } from '../../common/Logo';
+import { UserPreview } from '../../common/UserPreview';
 
-const Container = styled.div`
-  background-color: ${({theme}) => theme.black};
+const HeaderContainer = styled.div`
+  background-color: ${({ theme }) => theme.black};
+  color: ${({ theme }) => theme.white};
   width: 100%;
-  padding: 0.3rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
 `;
 
-export const Header = () => {
+export const Header = ({ owner }) => {
   return (
-    <Container>
-      <Logo />
-    </Container>
+    <HeaderContainer>
+      <Row>
+        <Col span={5}>
+          <Logo />
+        </Col>
+        <Col span={14}></Col>
+        <Col span={5}>
+          <UserPreview {...owner} />
+        </Col>
+      </Row>
+    </HeaderContainer>
   );
 };

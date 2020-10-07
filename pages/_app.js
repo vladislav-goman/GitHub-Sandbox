@@ -4,7 +4,8 @@ import Head from 'next/head';
 import { ThemeProvider } from 'styled-components';
 import theme from '../src/theme/theme';
 import '../src/styles/reset.css';
-import '../src/styles/fonts.css'
+import '../src/styles/fonts.css';
+import 'antd/dist/antd.css';
 
 export default class MyApp extends App {
   render() {

@@ -2,6 +2,7 @@ const colors = {
   niceBlack: '#001F3F',
   black: '#000000',
   white: '#ffffff',
+  royalBlue: '#3333FF',
 };
 
 const spacing = {

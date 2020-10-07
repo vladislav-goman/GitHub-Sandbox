@@ -1,10 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import { ReposList } from '../src/components/layout/ReposList';
+import { Header } from '../src/components/layout/Header';
+import { BackTop } from '../src/components/common/BackTop';
 
 export async function getStaticProps() {
-  const res = await fetch('https://api.github.com/users/PeekyEater/repos');
-  const repositories = await res.json();
+  const username = 'PeekyEater';
+  const repositoriesResponse = await fetch(`https://api.github.com/users/${username}/repos`);
+  const repositories = await repositoriesResponse.json();
 
   return {
     props: {
@@ -23,12 +26,13 @@ const Container = styled.div`
   margin: auto;
 `;
 
-const Index = ({ repositories }) => {
+const Index = ({ repositories: repoData }) => {
+  const { owner: ownerData } = repoData[0];
   return (
     <Container>
-      <h1>Github Repo Sandbox</h1>
-      <p>A list of open GraphQL jobs.</p>
-      <ReposList repositories={repositories} />
+      <Header owner={ownerData} />
+      <ReposList repositories={repoData} />
+      <BackTop />
     </Container>
   );
 };
