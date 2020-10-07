@@ -31,7 +31,6 @@ const RepoDescription = styled.p`
 const { Meta } = Card;
 
 export const RepoItem = ({ name, html_url, description, language, updated_at, ...props }) => {
-  console.log(props);
   return (
     <RepoItemContainer>
       <Card

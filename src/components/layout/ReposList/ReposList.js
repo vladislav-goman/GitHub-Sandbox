@@ -2,19 +2,31 @@ import React from 'react';
 import styled from 'styled-components';
 import { RepoItem } from '../../common/RepoItem';
 import { Row, Col } from 'antd';
+import { filterByLanguage, findItemByName } from '../../../utils';
+import { orderingTypesMap } from '../../../utils';
 
 const ReposListContainer = styled.div`
-
+  margin: 2rem 0;
 `;
 
-export const ReposList = ({ repositories = [] }) => {
-  const content = repositories.map((repoItemData) => {
-    return (
-      <Col span={24}>
-        <RepoItem {...repoItemData} key={repoItemData.id} />
-      </Col>
-    );
-  });
+const getRepositories = (repoItemData) => {
+  return (
+    <Col span={24} key={repoItemData.id}>
+      <RepoItem {...repoItemData} />
+    </Col>
+  );
+};
+
+const applyOrdering = (items, orderingType) => {
+  return orderingType ? orderingTypesMap[orderingType](items) : items;
+}
+
+const applyFilters = (items) => (selectedLanguages) => (searchTerm) => (orderingType) =>
+  applyOrdering(filterByLanguage({ items: findItemByName({ items, searchTerm }), selectedLanguages }), orderingType);
+
+export const ReposList = ({ repositories = [], searchInputValue, selectedLanguages, orderingType }) => {
+  const filteredRepos = applyFilters(repositories)(selectedLanguages)(searchInputValue)(orderingType);
+  const content = filteredRepos.map(getRepositories);
   return (
     <ReposListContainer>
       <Row>{content}</Row>

@@ -9,7 +9,7 @@ const HeaderContainer = styled.div`
   color: ${({ theme }) => theme.white};
   width: 100%;
   padding: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 `;
 
 export const Header = ({ owner }) => {
