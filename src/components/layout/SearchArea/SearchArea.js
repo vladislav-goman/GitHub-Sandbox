@@ -11,7 +11,7 @@ const FilterItemWrapper = styled.div`
   width: 100%;
 
   @media screen and (max-width: 700px) {
-    margin-bottom: 1rem;
+    margin-bottom: ${({ theme }) => theme.spacing_2};
   }
 `;
 
