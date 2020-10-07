@@ -12,8 +12,6 @@ const BackTopBox = styled.div`
   text-align: center;
   font-size: 14px;
   transition: .3s all;
-  position: relative;
-  right: -68px;
 
   &:hover {
     box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.3);
