@@ -25,7 +25,8 @@ const applyOrdering = (items, orderingType) => {
 const applyFilters = (items) => (selectedLanguages) => (searchTerm) => (orderingType) =>
   applyOrdering(filterByLanguage({ items: findItemByName({ items, searchTerm }), selectedLanguages }), orderingType);
 
-export const ReposList = ({ repositories = [], searchInputValue }) => {
+export const ReposList = ({ searchInputValue }) => {
+  const repositories = useSelector(({ repositories }) => repositories);
   const orderingType = useSelector(({ searchAreaControls }) => searchAreaControls.orderingType);
   const selectedLanguages = useSelector(({ searchAreaControls }) => searchAreaControls.selectedLanguages);
 
