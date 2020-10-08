@@ -48,7 +48,7 @@ const Index = ({ repositories: repoData }) => {
       <Header />
       <Container>
         <SearchArea {...{ searchInputValue, setSearchInputValue }} />
-        <ReposList repositories={repoData} {...{ searchInputValue }} />
+        <ReposList  {...{ searchInputValue }} />
         <BackTop />
       </Container>
     </>
