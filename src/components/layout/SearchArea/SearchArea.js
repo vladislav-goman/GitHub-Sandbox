@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Input, Select, Row, Col } from 'antd';
+import { setSelectedLanguages, setOrderingType } from '../../../redux/actions/actionCreators';
 import { orderingTypesMap } from '../../../utils';
 
 const { Option } = Select;
@@ -15,8 +17,10 @@ const FilterItemWrapper = styled.div`
   }
 `;
 
-export const SearchArea = ({ languagesArray, searchInputValue, setSearchInputValue, setSelectedLanguages, setOrderingType }) => {
+export const SearchArea = ({ searchInputValue, setSearchInputValue }) => {
+  const languagesArray = useSelector(({ languagesArray }) => languagesArray);
   const [isMobileMode, setIsMobileMode] = useState(false);
+  const dispatch = useDispatch();
   const resizeHandler = () => {
     if (window.innerWidth > 700) {
       setIsMobileMode(false);
@@ -26,10 +30,10 @@ export const SearchArea = ({ languagesArray, searchInputValue, setSearchInputVal
   };
 
   const handleLanguagesChange = (value) => {
-    setSelectedLanguages(value);
+    dispatch(setSelectedLanguages(value));
   };
   const handleSortTypeChange = (value) => {
-    setOrderingType(value);
+    dispatch(setOrderingType(value));
   };
   const handleSearchInputChange = ({ target }) => {
     setSearchInputValue(target.value);

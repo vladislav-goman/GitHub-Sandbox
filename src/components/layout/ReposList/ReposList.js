@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 import { RepoItem } from '../../common/RepoItem';
 import { Row, Col } from 'antd';
 import { filterByLanguage, findItemByName } from '../../../utils';
@@ -24,7 +25,10 @@ const applyOrdering = (items, orderingType) => {
 const applyFilters = (items) => (selectedLanguages) => (searchTerm) => (orderingType) =>
   applyOrdering(filterByLanguage({ items: findItemByName({ items, searchTerm }), selectedLanguages }), orderingType);
 
-export const ReposList = ({ repositories = [], searchInputValue, selectedLanguages, orderingType }) => {
+export const ReposList = ({ repositories = [], searchInputValue }) => {
+  const orderingType = useSelector(({ searchAreaControls }) => searchAreaControls.orderingType);
+  const selectedLanguages = useSelector(({ searchAreaControls }) => searchAreaControls.selectedLanguages);
+
   const filteredRepos = applyFilters(repositories)(selectedLanguages)(searchInputValue)(orderingType);
   const content = filteredRepos.map(getRepositories);
   return (

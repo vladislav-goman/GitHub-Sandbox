@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { setRepositoriesArray, setLanguagesArray, setOwnerData } from '../src/redux/actions/actionCreators';
 import styled from 'styled-components';
 import { ReposList } from '../src/components/layout/ReposList';
 import { Header } from '../src/components/layout/Header';
@@ -28,19 +30,25 @@ const Container = styled.div`
 `;
 
 const Index = ({ repositories: repoData }) => {
-  const { owner: ownerData } = repoData[0];
-  const languagesArray = getLanguagesArray(repoData);
-
   const [searchInputValue, setSearchInputValue] = useState('');
-  const [selectedLanguages, setSelectedLanguages] = useState([]);
-  const [orderingType, setOrderingType] = useState('');
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const { owner: ownerData } = repoData[0];
+    const languagesArray = getLanguagesArray(repoData);
+
+    dispatch(setRepositoriesArray(repoData));
+    dispatch(setLanguagesArray(languagesArray));
+    dispatch(setOwnerData(ownerData));
+  }, []);
 
   return (
     <>
-      <Header owner={ownerData} />
+      <Header />
       <Container>
-        <SearchArea {...{ searchInputValue, setSearchInputValue, setOrderingType, setSelectedLanguages, languagesArray }} />
-        <ReposList repositories={repoData} {...{ searchInputValue, selectedLanguages, orderingType }} />
+        <SearchArea {...{ searchInputValue, setSearchInputValue }} />
+        <ReposList repositories={repoData} {...{ searchInputValue }} />
         <BackTop />
       </Container>
     </>

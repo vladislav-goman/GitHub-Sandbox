@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Row, Col } from 'antd';
 import { Logo } from '../../common/Logo';
@@ -13,7 +14,8 @@ const HeaderContainer = styled.div`
   margin-bottom: 2rem;
 `;
 
-export const Header = ({ owner }) => {
+export const Header = () => {
+  const owner = useSelector(({ owner }) => owner);
   return (
     <HeaderContainer>
       <Row>

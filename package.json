@@ -16,6 +16,8 @@
     "node-fetch": "^2.6.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-redux": "^7.2.1",
+    "redux": "^4.0.5",
     "sass": "^1.26.11",
     "styled-components": "^5.2.0"
   }
