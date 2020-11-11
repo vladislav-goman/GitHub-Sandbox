@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState, useCallback } from 'react';
 import styled from 'styled-components';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { searchAreaControls, languagesArray as languagesArrayAtom } from '../../../recoil/atoms';
 import { Input, Select, Row, Col } from 'antd';
-import { setSelectedLanguages, setOrderingType } from '../../../redux/actions/actionCreators';
 import { orderingTypesMap } from '../../../utils';
 
 const { Option } = Select;
@@ -18,9 +18,29 @@ const FilterItemWrapper = styled.div`
 `;
 
 export const SearchArea = ({ searchInputValue, setSearchInputValue }) => {
-  const languagesArray = useSelector(({ languagesArray }) => languagesArray);
+  const languagesArray = useRecoilValue(languagesArrayAtom);
+
+  const setSearchAreaControls = useSetRecoilState(searchAreaControls);
+
+  const setSelectedLanguages = useCallback(
+    (value) => {
+      setSearchAreaControls((oldSearchAreaControls) => {
+        return { ...oldSearchAreaControls, selectedLanguages: value };
+      });
+    },
+    [setSearchAreaControls]
+  );
+  const setOrderingType = useCallback(
+    (value) => {
+      setSearchAreaControls((oldSearchAreaControls) => {
+        return { ...oldSearchAreaControls, orderingType: value };
+      });
+    },
+    [setSearchAreaControls]
+  );
+
   const [isMobileMode, setIsMobileMode] = useState(false);
-  const dispatch = useDispatch();
+
   const resizeHandler = () => {
     if (window.innerWidth > 700) {
       setIsMobileMode(false);
@@ -30,10 +50,10 @@ export const SearchArea = ({ searchInputValue, setSearchInputValue }) => {
   };
 
   const handleLanguagesChange = (value) => {
-    dispatch(setSelectedLanguages(value));
+    setSelectedLanguages(value);
   };
   const handleSortTypeChange = (value) => {
-    dispatch(setOrderingType(value));
+    setOrderingType(value);
   };
   const handleSearchInputChange = ({ target }) => {
     setSearchInputValue(target.value);

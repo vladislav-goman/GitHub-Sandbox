@@ -12,8 +12,9 @@ export const findItemByName = ({ items, searchTerm }) => {
   return items.filter(({ name, description }) => name?.includes(searchTerm) || description?.includes(searchTerm));
 };
 
-export const sortAscByName = (items) =>
-  items.sort((a, b) => {
+export const sortAscByName = (items) => {
+  const shallowCopy = [...items];
+  shallowCopy.sort((a, b) => {
     const nameA = a.name.toUpperCase();
     const nameB = b.name.toUpperCase();
     if (nameA < nameB) {
@@ -25,9 +26,12 @@ export const sortAscByName = (items) =>
 
     return 0;
   });
+  return shallowCopy;
+};
 
-export const sortDescByName = (items) =>
-  items.sort((a, b) => {
+export const sortDescByName = (items) => {
+  const shallowCopy = [...items];
+  shallowCopy.sort((a, b) => {
     const nameA = a.name.toUpperCase();
     const nameB = b.name.toUpperCase();
     if (nameA < nameB) {
@@ -39,8 +43,14 @@ export const sortDescByName = (items) =>
 
     return 0;
   });
+  return shallowCopy;
+};
 
-export const sortByLastUpdated = (items) => items.sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime());
+export const sortByLastUpdated = (items) => {
+  const shallowCopy = [...items];
+  shallowCopy.sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime());
+  return shallowCopy;
+};
 
 export const orderingTypesMap = {
   Ascending: sortAscByName,

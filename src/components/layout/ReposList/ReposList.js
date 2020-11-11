@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+import { useRecoilValue } from 'recoil';
+import { searchAreaControls, repositoriesArray } from '../../../recoil/atoms';
 import { RepoItem } from '../../common/RepoItem';
 import { Row, Col } from 'antd';
 import { filterByLanguage, findItemByName } from '../../../utils';
@@ -20,15 +21,14 @@ const getRepositories = (repoItemData) => {
 
 const applyOrdering = (items, orderingType) => {
   return orderingType ? orderingTypesMap[orderingType](items) : items;
-}
+};
 
 const applyFilters = (items) => (selectedLanguages) => (searchTerm) => (orderingType) =>
   applyOrdering(filterByLanguage({ items: findItemByName({ items, searchTerm }), selectedLanguages }), orderingType);
 
 export const ReposList = ({ searchInputValue }) => {
-  const repositories = useSelector(({ repositories }) => repositories);
-  const orderingType = useSelector(({ searchAreaControls }) => searchAreaControls.orderingType);
-  const selectedLanguages = useSelector(({ searchAreaControls }) => searchAreaControls.selectedLanguages);
+  const repositories = useRecoilValue(repositoriesArray);
+  const { orderingType, selectedLanguages } = useRecoilValue(searchAreaControls);
 
   const filteredRepos = applyFilters(repositories)(selectedLanguages)(searchInputValue)(orderingType);
   const content = filteredRepos.map(getRepositories);
