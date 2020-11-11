@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { setRepositoriesArray, setLanguagesArray, setOwnerData } from '../src/redux/actions/actionCreators';
 import styled from 'styled-components';
+import { useSetRecoilState } from 'recoil';
+import { languagesArray, ownerData, repositoriesArray} from '../src/recoil/atoms';
 import { ReposList } from '../src/components/layout/ReposList';
 import { Header } from '../src/components/layout/Header';
 import { SearchArea } from '../src/components/layout/SearchArea';
@@ -32,16 +32,18 @@ const Container = styled.div`
 const Index = ({ repositories: repoData }) => {
   const [searchInputValue, setSearchInputValue] = useState('');
 
-  const dispatch = useDispatch();
+  const setRepositoriesArray = useSetRecoilState(repositoriesArray);
+  const setLanguagesArray = useSetRecoilState(languagesArray);
+  const setOwnerData = useSetRecoilState(ownerData);
 
   useEffect(() => {
     const { owner: ownerData } = repoData[0];
     const languagesArray = getLanguagesArray(repoData);
 
-    dispatch(setRepositoriesArray(repoData));
-    dispatch(setLanguagesArray(languagesArray));
-    dispatch(setOwnerData(ownerData));
-  }, []);
+    setRepositoriesArray(repoData);
+    setLanguagesArray(languagesArray);
+    setOwnerData(ownerData);
+  });
 
   return (
     <>

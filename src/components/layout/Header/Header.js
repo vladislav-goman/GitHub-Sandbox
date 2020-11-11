@@ -1,6 +1,7 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { useRecoilValue } from 'recoil';
+import { ownerData } from '../../../recoil/atoms';
 import { Row, Col } from 'antd';
 import { Logo } from '../../common/Logo';
 import { UserPreview } from '../../common/UserPreview';
@@ -15,7 +16,8 @@ const HeaderContainer = styled.div`
 `;
 
 export const Header = () => {
-  const owner = useSelector(({ owner }) => owner);
+  const owner = useRecoilValue(ownerData);
+
   return (
     <HeaderContainer>
       <Row>
